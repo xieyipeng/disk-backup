@@ -62,34 +62,15 @@ if __name__ == '__main__':
 
 """
 1.安装服务
- 
-python PythonService.py install
- 
+python test.py install
 2.让服务自动启动
- 
-python PythonService.py --startup auto install 
- 
+python test.py --startup auto install 
 3.启动服务
- 
-python PythonService.py start
- 
+python test.py start
 4.重启服务
- 
-python PythonService.py restart
- 
+python test.py restart
 5.停止服务
- 
-python PythonService.py stop
- 
+python test.py stop
 6.删除/卸载服务
- 
-python PythonService.py remove
-"""
-
-# CreateEvent
-"""
-LPSECURITY_ATTRIBUTES lpEventAttributes,　　// 安全属性
-BOOL bManualReset, 　　　　　　　　　　　　　　// 复位方式　　
-BOOL bInitialState, 　　　　　　　　　　　　　 // 初始状态 　　
-LPCTSTR lpName　　
+python test.py remove
 """
