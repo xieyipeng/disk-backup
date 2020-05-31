@@ -35,3 +35,13 @@ python test.py stop
 python test.py remove
 python test.py restart
 ```
+# 2、python程序打包（在python36下可以打包成功）
+* 安装pyinstaller模块
+```python
+pip install pywin32
+pip install pyinstaller
+```
+* 封装
+```python
+pyinstaller -F -w main.py
+```

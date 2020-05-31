@@ -1,8 +1,9 @@
+# -*- coding: UTF-8 -*-
 import os
 import shutil
 
-import psutil
-import win32serviceutil
+from psutil import disk_partitions
+from win32serviceutil import ServiceFramework, HandleCommandLine
 import win32service
 import win32event
 import time
@@ -15,13 +16,13 @@ cache_files = []
 sub_size = 6
 
 
-class PythonService(win32serviceutil.ServiceFramework):
+class PythonService(ServiceFramework):
     _svc_name_ = "disk-backup"
     _svc_display_name_ = "disk-backup-xieyipeng"
     _svc_description_ = "Automatic disk backup"
 
     def __init__(self, args):
-        win32serviceutil.ServiceFramework.__init__(self, args)
+        ServiceFramework.__init__(self, args)
         self.hWaitStop = win32event.CreateEvent(None, 0, 0, None)
         self.logger = self._getLogger()
         self.T = time.time
@@ -53,7 +54,7 @@ class PythonService(win32serviceutil.ServiceFramework):
             # TODO: 检测磁盘变动
             driver, opts = '', ''
             have_disk = False
-            for disk in psutil.disk_partitions():
+            for disk in disk_partitions():
                 if 'removable' in disk.opts:
                     driver, opts = disk.device, disk.opts  # 卷标，是否移动U盘
                     if flag in os.listdir(driver):
@@ -167,6 +168,7 @@ def my_sub(c_root_path, d_root_path):
     c = len(c_root_path)
     return c, d
 
+
 def get_list(sub, cache_path):
     """
     获取缓冲区内地文件列表
@@ -187,5 +189,6 @@ def get_list(sub, cache_path):
             _dirs.append(os.path.join(root, dir))
     return _list, _dirs
 
+
 if __name__ == '__main__':
-    win32serviceutil.HandleCommandLine(PythonService)
+    HandleCommandLine(PythonService)
