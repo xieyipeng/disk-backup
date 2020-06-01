@@ -64,24 +64,33 @@ class Main(QWidget):
         uninstall.clicked.connect(self.uninstall_service)
 
     def stop_service(self):
-        run_command(self, 'python main.py stop')
+        try:
+            os.system('python main.py stop')
+            QMessageBox.information(self, 'Warning', '停止成功！')
+        except Exception as e:
+            QMessageBox.information(self, 'Warning', e)
+        # run_command(self, 'python main.py stop')
 
     def start_service(self):
         try:
             os.system('python main.py start')
+            QMessageBox.information(self, 'Warning', '开始成功！')
         except Exception as e:
             QMessageBox.information(self, 'Warning', e)
 
     def install_service(self):
-        # try:
-        #     os.system('python main.py install')
-        # except Exception as e:
-        #     QMessageBox.information(self, 'Warning', e)
-        run_command('python main.py install')
+        print(os.system('dir'))
+        try:
+            os.system('python E:\disk-backup\main.py install')
+            QMessageBox.information(self, 'Warning', '安装成功！')
+        except Exception as e:
+            QMessageBox.information(self, 'Warning', e)
+        # run_command('python main.py install')
 
     def uninstall_service(self):
         try:
-            os.system('python main.py uninstall')
+            os.system('python main.py remove')
+            QMessageBox.information(self, 'Warning', '删除成功！')
         except Exception as e:
             QMessageBox.information(self, 'Warning', e)
 
