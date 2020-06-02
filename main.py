@@ -86,8 +86,8 @@ class PythonService(ServiceFramework):
                     # TODO: copy
                     copy(c_cache_path, driver, lack_file, self.logger)
                     self.logger.info('拷贝结束！')
-                else:
-                    self.logger.info('不存在缺失文件，继续循环。。。')
+                # else:
+                    # self.logger.info('不存在缺失文件，继续循环。。。')
             time.sleep(10)
 
     def SvcStop(self):
